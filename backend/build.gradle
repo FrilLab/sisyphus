@@ -62,7 +62,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
 
     // Swagger UI + OpenAPI 문서 자동 생성 (Spring MVC)
-    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.14"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.3"
 
     // dotenv
 //    implementation "me.paulschwarz:spring-dotenv:3.0.0"
