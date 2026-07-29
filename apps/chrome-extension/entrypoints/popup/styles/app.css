@@ -44,6 +44,8 @@
 
   /* Layout and motion */
   --popup-width: 26.25rem;
+  --popup-height: calc(var(--popup-width) * 4 / 3);
+  --popup-aspect-ratio: 3 / 4;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
@@ -83,16 +85,28 @@
 
 body {
   margin: 0;
+  min-width: var(--popup-width);
+  min-height: var(--popup-height);
   background: var(--background);
   color: var(--text-primary);
 }
 
 #root {
-  width: 100%;
-  max-width: var(--popup-width);
+  width: var(--popup-width);
+  min-height: calc(var(--popup-height) - (var(--space-4) * 2));
+  aspect-ratio: var(--popup-aspect-ratio);
   margin: 0 auto;
   padding: var(--space-4);
   text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+#root .app-shell {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
 }
 
 hr {
@@ -107,6 +121,7 @@ hr {
   margin-bottom: var(--space-4);
   padding-bottom: var(--space-3);
   border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
 #header .logo_btn {
@@ -148,6 +163,9 @@ hr {
   border-radius: var(--radius-role-card);
   background: var(--surface);
   padding: var(--space-4);
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
 }
 
 #main .page-header {
@@ -366,6 +384,7 @@ hr {
   margin-top: var(--space-4);
   display: flex;
   gap: var(--space-2);
+  flex-shrink: 0;
 }
 
 #footer button[type='button'] {

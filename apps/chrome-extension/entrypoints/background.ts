@@ -1,4 +1,5 @@
 import { defineBackground } from 'wxt/utils/define-background';
+import { POPUP_HEIGHT, POPUP_WIDTH } from './popup/popup.constants';
 
 export default defineBackground(() => {
   const setSelectedWord = (selectedWord: string) =>
@@ -38,8 +39,8 @@ export default defineBackground(() => {
             {
               url: popupUrl,
               type: 'popup',
-              width: 420,
-              height: 640,
+              width: POPUP_WIDTH,
+              height: POPUP_HEIGHT,
               focused: true,
             },
             () => {

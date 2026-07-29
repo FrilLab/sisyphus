@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
+import { POPUP_HEIGHT, POPUP_WIDTH } from './popup.constants';
 
 const repositoryRoot = fileURLToPath(new URL('../../../..', import.meta.url));
 const webCssPath = join(repositoryRoot, 'apps/web/src/styles/index.css');
@@ -41,6 +42,15 @@ describe('chrome extension UI alignment', () => {
     expect(extensionCss).not.toMatch(/radial-gradient|linear-gradient|box-shadow:\s*var\(--shadow/);
     expect(extensionCss).toContain('border: 1px solid var(--border)');
     expect(extensionCss).toContain('background: var(--action-primary)');
+  });
+
+  it('uses a 4:3 portrait popup frame shared by CSS and fallback window', () => {
+    const extensionCss = readFileSync(extensionCssPath, 'utf8');
+
+    expect(POPUP_HEIGHT).toBe(Math.round((POPUP_WIDTH * 4) / 3));
+    expect(extensionCss).toContain('--popup-aspect-ratio: 3 / 4');
+    expect(extensionCss).toContain('--popup-height: calc(var(--popup-width) * 4 / 3)');
+    expect(extensionCss).toContain('aspect-ratio: var(--popup-aspect-ratio)');
   });
 
   it('keeps extension source free of raw brand hex values outside token definitions', () => {
