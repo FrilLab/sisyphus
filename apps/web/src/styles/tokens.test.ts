@@ -33,8 +33,11 @@ describe('design tokens', () => {
 
     expect(extensionCss).toContain(`--sis: ${BRAND_PRIMARY}`);
     expect(extensionCss).toContain(`--sisy: ${BRAND_ACCENT}`);
-    expect(extensionCss).toContain('--color-action-primary: var(--sis)');
-    expect(extensionCss).toContain('--color-highlight: var(--sisy)');
+    expect(extensionCss).toContain('--action-primary: color-mix(in srgb, var(--sis) 84%, black)');
+    expect(extensionCss).toContain('--color-action-primary: var(--action-primary)');
+    expect(extensionCss).toContain('--focus-ring: var(--sis)');
+    expect(extensionCss).toContain('--success: #187a57');
+    expect(extensionCss).toContain('--danger: #b42318');
     expect(extensionCss).toMatch(/prefers-reduced-motion:\s*reduce/);
   });
 

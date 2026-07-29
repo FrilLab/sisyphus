@@ -7,6 +7,8 @@ export default function Header() {
     <header id="header">
       <button
         className="logo_btn tooltip-wrapper"
+        type="button"
+        aria-label={t('header.tooltip')}
         onClick={() => {
           // TODO: url 변경
           chrome.tabs.create({ url: `${HOST_URL}` });

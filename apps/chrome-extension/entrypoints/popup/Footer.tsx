@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer id="footer" style={{ display: accessToken ? 'flex' : 'block' }}>
       {accessToken && (
-        <button type="button" onClick={logoutHandler}>
+        <button type="button" className="logout" onClick={logoutHandler}>
           {t('footer.logout')}
         </button>
       )}

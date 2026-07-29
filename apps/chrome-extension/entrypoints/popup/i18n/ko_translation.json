@@ -4,6 +4,8 @@
   },
   "main": {
     "auth": {
+      "title": "로그인",
+      "description": "계정으로 로그인해 선택한 단어를 저장하세요.",
       "email": "이메일",
       "example": "example@example.com",
       "required_email": "이메일을 입력해주세요.",
@@ -22,6 +24,8 @@
       }
     },
     "note": {
+      "title": "빠른 저장",
+      "description": "선택한 단어와 의미를 바로 저장하세요.",
       "tit": "제목 (단어)",
       "tit_place": "제목 또는 단어를 입력해주세요.",
       "tit_required": "제목 또는 단어는 필수 입력 항목입니다.",

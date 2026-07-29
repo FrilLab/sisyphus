@@ -14,7 +14,7 @@ function App() {
   // TODO: wxt.config.ts 도 translation 가능한지 확인
   // TODO: apple oauth 추가
   return (
-    <div>
+    <div className="app-shell">
       <Header />
       <ContentPage />
       <Footer />
