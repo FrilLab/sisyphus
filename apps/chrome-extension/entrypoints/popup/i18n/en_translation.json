@@ -4,6 +4,8 @@
   },
   "main": {
     "auth": {
+      "title": "Sign in",
+      "description": "Sign in to save the word you selected.",
       "email": "Email",
       "example": "example@example.com",
       "required_email": "Please enter your email.",
@@ -22,6 +24,8 @@
       }
     },
     "note": {
+      "title": "Quick save",
+      "description": "Save the selected word and meaning right away.",
       "tit": "Title (Word)",
       "tit_place": "Enter a title or word.",
       "tit_required": "A title or word is required.",

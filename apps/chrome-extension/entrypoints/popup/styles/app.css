@@ -1,41 +1,63 @@
-/* =========================================
-   Base / Theme Tokens
-========================================= */
+/* Popup tokens aligned with apps/web/src/styles/index.css and ui-foundation.md */
 :root {
-  /* fonts */
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
-    Arial, sans-serif;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  /* system theme */
   color-scheme: light dark;
 
-  /* tokens */
-  --bg: #0b1220;
-  --bg2: #0f172a;
-  --card: rgba(255, 255, 255, 0.06);
-  --card2: rgba(255, 255, 255, 0.08);
-  --border: rgba(255, 255, 255, 0.12);
-  --border2: rgba(255, 255, 255, 0.16);
-  --text: rgba(255, 255, 255, 0.92);
-  --muted: rgba(255, 255, 255, 0.62);
-  --muted2: rgba(255, 255, 255, 0.48);
-
+  /* Canonical brand sources */
   --sis: #1186ce;
   --sisy: #ffcd49;
-  --color-action-primary: var(--sis);
-  --color-highlight: var(--sisy);
+
+  /* Shared semantic roles */
+  --brand-primary: var(--sis);
+  --brand-primary-hover: color-mix(in srgb, var(--sis) 88%, black);
+  --brand-accent: var(--sisy);
+  --brand-accent-subtle: color-mix(in srgb, var(--sisy) 22%, white);
+  --action-primary: color-mix(in srgb, var(--sis) 84%, black);
+  --action-primary-hover: color-mix(in srgb, var(--sis) 74%, black);
+  --focus-ring: var(--sis);
+  --text-on-brand-primary: #ffffff;
+
   /* Legacy aliases retained while popup styles are consolidated. */
+  --color-action-primary: var(--action-primary);
+  --color-highlight: var(--brand-accent);
   --point-b: var(--color-action-primary);
   --point-y: var(--color-highlight);
 
-  --danger: #ff4d6d;
-  --success: #3ddc97;
+  /* Semantic state roles */
+  --success: #187a57;
+  --success-subtle: #e8f5ef;
+  --danger: #b42318;
+  --danger-subtle: #feeceb;
+  --info: #0d6fae;
+  --info-subtle: #e8f4fb;
 
-  --radius: 14px;
-  --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
-  --shadow2: 0 10px 24px rgba(0, 0, 0, 0.22);
+  /* Popup surfaces */
+  --background: #ffffff;
+  --surface: #ffffff;
+  --surface-muted: #f4f4f5;
+  --text-primary: #18181b;
+  --text-secondary: #71717a;
+  --border: #e4e4e7;
+
+  /* Layout and motion */
+  --popup-width: 26.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --radius-role-control: 0.5rem;
+  --radius-role-card: 0.75rem;
+  --motion-fast: 140ms;
+  --motion-standard: 220ms;
+  --font-h3: 1.125rem;
+  --line-h3: 1.625rem;
+  --font-body: 1rem;
+  --line-body: 1.5rem;
+  --font-small: 0.875rem;
+  --line-small: 1.25rem;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -44,63 +66,47 @@
   -webkit-text-size-adjust: 100%;
 }
 
-/* Light mode 개선 */
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --bg: #f6f8ff;
-    --bg2: #eef3ff;
-    --card: rgba(255, 255, 255, 0.92);
-    --card2: rgba(255, 255, 255, 0.86);
-    --border: rgba(15, 23, 42, 0.14);
-    --border2: rgba(15, 23, 42, 0.18);
-    --text: rgba(15, 23, 42, 0.92);
-    --muted: rgba(15, 23, 42, 0.62);
-    --muted2: rgba(15, 23, 42, 0.48);
-    --shadow: 0 20px 60px rgba(2, 6, 23, 0.12);
-    --shadow2: 0 10px 22px rgba(2, 6, 23, 0.1);
+    --background: #09090b;
+    --surface: #09090b;
+    --surface-muted: #18181b;
+    --text-primary: #fafafa;
+    --text-secondary: #a1a1aa;
+    --border: #27272a;
+    --success-subtle: color-mix(in srgb, var(--success) 18%, black);
+    --danger-subtle: color-mix(in srgb, var(--danger) 18%, black);
+    --info-subtle: color-mix(in srgb, var(--info) 18%, black);
+    --brand-accent-subtle: color-mix(in srgb, var(--sisy) 18%, black);
   }
 }
 
-/* =========================================
-   App Container (Popup 느낌)
-========================================= */
 body {
   margin: 0;
-  background: radial-gradient(
-      1200px 500px at 20% -10%,
-      rgba(17, 134, 206, 0.35),
-      transparent 60%
-    ),
-    radial-gradient(
-      900px 460px at 120% 10%,
-      rgba(255, 205, 73, 0.22),
-      transparent 55%
-    ),
-    linear-gradient(180deg, var(--bg), var(--bg2));
-  color: var(--text);
+  background: var(--background);
+  color: var(--text-primary);
 }
 
 #root {
   width: 100%;
-  max-width: 420px;
+  max-width: var(--popup-width);
   margin: 0 auto;
-  padding: 14px;
+  padding: var(--space-4);
   text-align: left;
 }
 
-/* 공통 분리선 */
 hr {
   border: 0;
   border-top: 1px solid var(--border);
-  margin: 14px 0;
+  margin: var(--space-4) 0;
 }
 
-/* =========================================
-   Header
-========================================= */
+/* Header */
 #header {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border);
 }
 
 #header .logo_btn {
@@ -108,198 +114,152 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-
-  padding: 10px 12px;
-  border-radius: var(--radius);
-
-  border: 1px solid var(--border);
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.06),
-    rgba(255, 255, 255, 0.02)
-  );
-  box-shadow: var(--shadow2);
-
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: 0;
+  border-radius: var(--radius-role-control);
+  background: transparent;
   cursor: pointer;
-  transition: transform 160ms ease, border-color 160ms ease,
-    box-shadow 160ms ease, background 160ms ease;
+  transition: background-color var(--motion-fast) ease;
 }
 
 #header .logo_btn:hover {
-  transform: translateY(-1px);
-  border-color: var(--border2);
-  box-shadow: var(--shadow);
+  background: var(--surface-muted);
 }
 
-#header .logo_btn:active {
-  transform: translateY(0);
+#header .logo_btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
 }
 
 #header .img_png {
-  height: 28px;
+  height: 1.75rem;
   width: auto;
-  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
 }
 
 #header .img_text {
-  height: 22px;
+  height: 1.375rem;
   width: auto;
-  opacity: 0.95;
 }
 
-/* =========================================
-   Main Card
-========================================= */
+/* Main panel */
 #main {
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.06),
-    rgba(255, 255, 255, 0.03)
-  );
-  box-shadow: var(--shadow2);
-  padding: 14px;
+  border-radius: var(--radius-role-card);
+  background: var(--surface);
+  padding: var(--space-4);
 }
 
-#main h2 {
-  margin: 0 0 10px 0;
-  color: var(--point-b);
-  letter-spacing: -0.02em;
+#main .page-header {
+  margin-bottom: var(--space-4);
 }
 
-/* 상태 메시지(상단 알림 바) */
+#main .page-header h1 {
+  margin: 0;
+  font-size: var(--font-h3);
+  line-height: var(--line-h3);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+#main .page-header p {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-small);
+  line-height: var(--line-small);
+  color: var(--text-secondary);
+}
+
 #main .state_msg {
   display: block;
-  margin-bottom: 12px;
-
-  border: 1px solid rgba(255, 205, 73, 0.35);
-  background: linear-gradient(
-    135deg,
-    rgba(255, 205, 73, 0.18),
-    rgba(17, 134, 206, 0.12)
-  );
-  color: var(--text);
-
-  padding: 10px 12px;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 0.92rem;
+  margin-bottom: var(--space-4);
+  border: 1px solid var(--border);
+  background: var(--info-subtle);
+  color: var(--text-primary);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-role-control);
+  font-size: var(--font-small);
+  line-height: var(--line-small);
 }
 
-/* auth-page */
+#main .state_msg[data-tone='success'] {
+  background: var(--success-subtle);
+}
+
+#main .state_msg[data-tone='error'] {
+  background: var(--danger-subtle);
+}
+
 #main .auth-page {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-/* =========================================
-   Forms
-========================================= */
+/* Forms */
 #main .form,
 #main .form_tag {
   width: 100%;
-  max-width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-}
-
-#main .title {
-  font-size: 1.15rem;
-  font-weight: 800;
-  margin-bottom: 4px;
-  text-align: center;
+  gap: var(--space-4);
 }
 
 #main .field {
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 #main .field + .field {
   border-top: 1px solid var(--border);
-  padding-top: 12px;
-  margin-top: 8px;
+  padding-top: var(--space-4);
+  margin-top: var(--space-2);
 }
 
 #main .field label {
-  font-size: 0.9rem;
-  width: 100%;
-  color: var(--muted);
-  letter-spacing: -0.01em;
+  font-size: var(--font-small);
+  line-height: var(--line-small);
+  color: var(--text-secondary);
 }
 
-/* readonly box */
-#main .readonly-box {
-  padding: 10px 12px;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 0.98rem;
-
-  color: rgba(15, 23, 42, 0.92);
-  background: linear-gradient(
-    135deg,
-    rgba(255, 205, 73, 0.95),
-    rgba(255, 205, 73, 0.75)
-  );
-  border: 1px solid rgba(255, 205, 73, 0.45);
-}
-
-/* inputs */
 #main input[type='text'],
 #main input[type='email'],
 #main input[type='password'] {
-  padding: 12px 12px;
-  border-radius: 12px;
-
+  min-height: 2.75rem;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-role-control);
   border: 1px solid var(--border);
-  background: rgba(0, 0, 0, 0.14);
-  color: var(--text);
-
-  font-size: 0.98rem;
-
-  transition: border-color 160ms ease, box-shadow 160ms ease,
-    background 160ms ease;
-}
-
-@media (prefers-color-scheme: light) {
-  #main input[type='text'],
-  #main input[type='email'],
-  #main input[type='password'] {
-    background: rgba(15, 23, 42, 0.04);
-  }
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: var(--font-body);
+  line-height: var(--line-body);
+  transition: border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
 }
 
 #main input[type='text']::placeholder,
 #main input[type='email']::placeholder,
 #main input[type='password']::placeholder {
-  color: var(--muted2);
+  color: var(--text-secondary);
 }
 
 #main input[type='text']:focus,
 #main input[type='email']:focus,
 #main input[type='password']:focus {
   outline: none;
-  border-color: rgba(255, 205, 73, 0.6);
-  box-shadow: 0 0 0 4px rgba(255, 205, 73, 0.18);
-  background: rgba(0, 0, 0, 0.18);
+  border-color: var(--focus-ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus-ring) 24%, transparent);
 }
 
-/* errors */
 #main .error {
   color: var(--danger);
-  font-size: 0.88rem;
+  font-size: var(--font-small);
+  line-height: var(--line-small);
   margin: 0;
 }
 
-/* =========================================
-   Buttons
-========================================= */
+/* Buttons */
 #main button,
 #footer button {
   -webkit-tap-highlight-color: transparent;
@@ -308,39 +268,29 @@ hr {
 #main .save-button,
 #main button[type='submit'],
 #footer button[type='button'] {
+  min-height: 2.75rem;
   width: 100%;
-  border-radius: 12px;
-
-  border: 1px solid var(--border);
-  background: linear-gradient(
-    135deg,
-    rgba(17, 134, 206, 0.9),
-    rgba(17, 134, 206, 0.65)
-  );
-  color: #fff;
-
-  font-weight: 800;
-  font-size: 0.98rem;
-
+  border-radius: var(--radius-role-control);
+  border: 1px solid transparent;
+  background: var(--action-primary);
+  color: var(--text-on-brand-primary);
+  font-weight: 600;
+  font-size: var(--font-body);
   cursor: pointer;
-  transition: transform 140ms ease, box-shadow 140ms ease,
-    border-color 140ms ease, filter 140ms ease;
-  box-shadow: 0 10px 22px rgba(17, 134, 206, 0.22);
+  transition: background-color var(--motion-fast) ease;
 }
 
 #main .save-button:hover,
 #main button[type='submit']:hover,
 #footer button[type='button']:hover {
-  transform: translateY(-1px);
-  border-color: var(--border2);
-  filter: brightness(1.03);
-  text-decoration: none;
+  background: var(--action-primary-hover);
 }
 
-#main .save-button:active,
-#main button[type='submit']:active,
-#footer button[type='button']:active {
-  transform: translateY(0);
+#main .save-button:focus-visible,
+#main button[type='submit']:focus-visible,
+#footer button[type='button']:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
 }
 
 #main .save-button:disabled,
@@ -348,92 +298,81 @@ hr {
 #footer button[type='button']:disabled {
   cursor: not-allowed;
   opacity: 0.6;
-  box-shadow: none;
 }
 
-/* Logout 버튼은 위험색으로 */
 #footer button.logout {
-  font-size: small;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 77, 109, 0.95),
-    rgba(255, 77, 109, 0.7)
-  );
-  box-shadow: 0 10px 22px rgba(255, 77, 109, 0.18);
+  background: var(--danger);
+}
+
+#footer button.logout:hover {
+  background: color-mix(in srgb, var(--danger) 88%, black);
 }
 
 #root #footer button[type='button'] {
-  font-size: small;
-  padding: 4px 6px;
-  border-radius: 8px;
+  font-size: var(--font-small);
+  min-height: 2.5rem;
+  padding: var(--space-2) var(--space-3);
 }
 
-/* =========================================
-   Social Login
-========================================= */
+/* Social login */
 #main .social-login-wrapper {
   width: 100%;
 }
 
 #main .social-login-label {
   display: block;
-  margin: 4px 0 8px;
-  font-size: 0.78rem;
-  color: var(--muted);
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-small);
+  color: var(--text-secondary);
 }
 
 #main .social-login-buttons {
   display: flex;
   width: 100%;
-  padding: 10px 0 2px;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 #main .social-login-button {
+  min-height: 2.625rem;
   width: 100%;
-  height: 42px;
-  border-radius: 0;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-
+  gap: var(--space-2);
   border: 1px solid var(--border);
-  color: rgba(15, 23, 42, 0.92);
-  font-weight: 700;
-  box-shadow: none;
-
+  border-radius: var(--radius-role-control);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-weight: 600;
   cursor: pointer;
-  transition: border-color 140ms ease, background-color 140ms ease;
+  transition: border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease;
 }
 
 #main .social-login-button:hover {
-  border-color: var(--point-b);
-  text-decoration: none;
+  border-color: var(--brand-primary);
+  background: var(--surface-muted);
 }
 
-#main .social-login-button:active {
-  background-color: rgba(17, 134, 206, 0.08) !important;
+#main .social-login-button:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
 }
 
-/* =========================================
-   Footer
-========================================= */
+/* Footer */
 #footer {
   width: 100%;
-  margin-top: 12px;
+  margin-top: var(--space-4);
   display: flex;
-  gap: 10px;
+  gap: var(--space-2);
 }
 
-/* accessToken 있을 때 2개 버튼 균등 */
 #footer button[type='button'] {
   flex: 1;
 }
 
-/* =========================================
-   Tooltip
-========================================= */
+/* Tooltip */
 .tooltip-wrapper {
   position: relative;
   display: inline-flex;
@@ -446,56 +385,28 @@ hr {
   position: absolute;
   left: 50%;
   transform: translateX(-50%) translateY(0);
-
-  background: rgba(15, 23, 42, 0.92);
-  color: rgba(255, 255, 255, 0.92);
-
-  padding: 8px 10px;
-  border-radius: 10px;
-
+  background: var(--text-primary);
+  color: var(--background);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-role-control);
   white-space: nowrap;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-
+  font-size: 0.75rem;
+  font-weight: 600;
   z-index: 20;
   opacity: 0;
   pointer-events: none;
-
-  transition: opacity 140ms ease, transform 140ms ease;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  transition: opacity var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
 }
 
 .tooltip {
-  bottom: -10px;
+  bottom: -0.625rem;
   transform: translateX(-50%) translateY(90%);
 }
 
 .tooltip_top {
-  bottom: calc(100% + 10px);
-  transform: translateX(-50%) translateY(6px);
-}
-
-.tooltip::after,
-.tooltip_top::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-
-  border-width: 6px;
-  border-style: solid;
-}
-
-.tooltip::after {
-  top: -11px;
-  border-color: transparent transparent rgba(15, 23, 42, 0.92) transparent;
-}
-
-.tooltip_top::after {
-  top: 100%;
-  border-color: rgba(15, 23, 42, 0.92) transparent transparent transparent;
+  bottom: calc(100% + 0.625rem);
+  transform: translateX(-50%) translateY(0.375rem);
 }
 
 .tooltip-wrapper:hover .tooltip,
