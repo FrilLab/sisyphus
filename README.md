@@ -273,16 +273,23 @@ Sisyphus Academy v0.0.1 is defined as:
 
 ---
 
-## UI design contract
+## Documentation
 
-Web and Chrome extension UI work follows:
+| Topic | Document |
+| --- | --- |
+| API routes, auth, pagination, errors | [docs/API.md](docs/API.md) |
+| System architecture | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
+| Local development | [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) |
+| OAuth setup (web + extension) | [docs/OAUTH_SETUP.md](docs/OAUTH_SETUP.md) |
+| Deployment | [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) |
+| Security | [docs/SECURITY.md](docs/SECURITY.md) |
+| UI foundation and design tokens | [docs/design/ui-foundation.md](docs/design/ui-foundation.md) |
+| Component and state contracts | [docs/design/component-contracts.md](docs/design/component-contracts.md) |
+| Product UX and terminology | [docs/product/ux-language.md](docs/product/ux-language.md) |
 
-- [UI foundation and design tokens](docs/design/ui-foundation.md)
-- [Component and state contracts](docs/design/component-contracts.md)
-- [Product UX and terminology](docs/product/ux-language.md)
-
-These documents extend the existing Tailwind and shadcn architecture and are
-the visual and interaction baseline for page-specific work.
+Web and Chrome extension UI work follows the design and UX documents above.
+They extend the existing Tailwind and shadcn architecture and are the visual
+and interaction baseline for page-specific work.
 
 ---
 
@@ -326,6 +333,7 @@ Start the API locally and open:
 
 * Swagger UI: `http://localhost:8080/swagger-ui/index.html`
 * OpenAPI JSON: `http://localhost:8080/v3/api-docs`
+* Human-readable catalog: [docs/API.md](docs/API.md)
 
 Documentation is generated from Spring MVC routes, request/response DTOs, validation annotations, and OpenAPI annotations. Protected operations use the `bearerAuth` security scheme; enter an access token through Swagger UI's **Authorize** action. No token or credential is preconfigured.
 
