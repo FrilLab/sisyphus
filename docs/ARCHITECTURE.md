@@ -1,31 +1,43 @@
-# Sisyphus Academy
+# Sisyphus Academy Architecture
 
 Sisyphus Academy is a self-hosted knowledge capture platform built with Spring Boot, React, a Chrome extension, PostgreSQL, Redis, and Docker.
 
-The project is designed with a clear separation between reusable platform infrastructure and academy-specific business logic.
+The project separates reusable platform infrastructure from academy-specific business logic.
+
+For the endpoint catalog, auth flows, and client integration notes, see [API Reference](./API.md).
 
 ---
 
 # High Level Architecture
 
-```text
-┌─────────────────────────┐
-│ Web App / Extension     │
-└───────────┬─────────────┘
-            │
-            ▼
-┌─────────────────────────┐
-│ Nginx Gateway           │
-└───────────┬─────────────┘
-            │
-            ▼
-┌─────────────────────────┐
-│ Spring Boot Backend     │
-└───────┬───────┬─────────┘
-        │       │
-        │       │
-        ▼       ▼
- PostgreSQL   Redis
+```mermaid
+flowchart TB
+  subgraph Clients
+    WEB[Web App\napps/web]
+    EXT[Chrome Extension\napps/chrome-extension]
+  end
+
+  subgraph Edge
+    NGINX[Nginx Gateway\noptional Docker stack]
+  end
+
+  subgraph Backend["Spring Boot API (apps/api)"]
+    SEC[Security + JWT/OAuth]
+    FEAT[Feature modules]
+  end
+
+  subgraph Storage
+    PG[(PostgreSQL)]
+    REDIS[(Redis)]
+    FILES[(Upload storage)]
+  end
+
+  WEB --> NGINX
+  EXT --> NGINX
+  NGINX --> SEC --> FEAT
+  FEAT --> PG
+  FEAT --> REDIS
+  FEAT --> FILES
 ```
 
 ---
@@ -48,14 +60,16 @@ mail, Redis, and OAuth adapters remain in their owning feature packages.
 
 ## Request flow
 
-```text
-Security filter
-  → Controller (transport only)
-  → Service (@Transactional boundary)
-  → Repository
-  → Entity
-  → Service maps Response DTO
-  → Controller returns HTTP response
+```mermaid
+flowchart LR
+  REQ[HTTP Request] --> FIL[JwtAuthenticationFilter]
+  FIL --> CTL[Controller]
+  CTL --> SVC[Service]
+  SVC --> REPO[Repository]
+  REPO --> ENT[Entity]
+  ENT --> SVC
+  SVC --> DTO[Response DTO]
+  DTO --> RES[JSON Response]
 ```
 
 Controllers must not access repositories, make business decisions, or return
@@ -211,11 +225,16 @@ Responsible for:
 
 The web application lives in `apps/web` and follows a feature-oriented structure.
 
-```text
-src/
-├── app/
-├── features/
-└── components/
+```mermaid
+flowchart TB
+  APP[app/\nrouter, providers]
+  FEAT[features/\nbusiness UI + hooks]
+  UI[components/\nshared UI]
+  STYLES[styles/\ntokens + index.css]
+
+  APP --> FEAT
+  FEAT --> UI
+  FEAT --> STYLES
 ```
 
 Guidelines:
@@ -225,17 +244,28 @@ Guidelines:
 - Shared UI components belong to `components/`.
 - Feature modules should avoid direct coupling.
 
+UI contracts: [ui-foundation.md](./design/ui-foundation.md),
+[component-contracts.md](./design/component-contracts.md),
+[ux-language.md](./product/ux-language.md).
+
 ---
 
 # Chrome Extension Architecture
 
-The browser extension lives in `apps/chrome-extension`.
+The browser extension lives in `apps/chrome-extension` and uses WXT entrypoints.
 
-Its code is organized around WXT entrypoints such as:
+```mermaid
+flowchart TB
+  BG[background.ts\nselection + popup launch]
+  POP[popup/\nauth + quick note form]
+  PUB[public/\nlocales + assets]
 
-- `entrypoints/background.ts`
-- `entrypoints/popup/`
-- `public/`
+  BG --> POP
+  POP --> API[(Backend /api)]
+```
+
+Popup UI aligns with web semantic tokens but uses plain CSS instead of shadcn
+components. See [ui-foundation.md](./design/ui-foundation.md#chrome-extension-alignment).
 
 ---
 
