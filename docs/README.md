@@ -33,10 +33,10 @@ If you are new to the project, read the documents in this order:
 
 When changing the web UI, read these three documents together:
 
-1. [`design/ui-foundation.md`](design/ui-foundation.md)  
+1. [`design/ui-foundation.md`](design/ui-foundation.md)
    Product direction, layout rules, responsive behavior, design tokens, and
    accessibility baseline.
-2. [`design/component-contracts.md`](design/component-contracts.md)  
+2. [`design/component-contracts.md`](design/component-contracts.md)
    Shared component boundaries, button/form/state rules, and feedback patterns.
 3. [`product/ux-language.md`](product/ux-language.md)  
    Product terminology, action wording, and screen-by-screen UX expectations.
