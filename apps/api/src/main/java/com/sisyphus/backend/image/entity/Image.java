@@ -3,7 +3,7 @@ package com.sisyphus.backend.image.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @DiscriminatorColumn(name = "image_type")
 @Entity
 @NoArgsConstructor
-@Where(clause = "deleted_at IS NULL") // deletedAt이 있는 image는 제외
+@SQLRestriction("deleted_at IS NULL") // deletedAt이 있는 image는 제외
 public abstract class Image {
 
     @Id
