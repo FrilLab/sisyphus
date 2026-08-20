@@ -273,16 +273,29 @@ Sisyphus Academy v0.0.1 is defined as:
 
 ---
 
+## Documentation guide
+
+If you want a quick map of the repository documentation, start with:
+
+- [Documentation guide](docs/README.md)
+
+Common entry points:
+
+- [Development workflow](docs/DEVELOPMENT.md)
+- [Backend architecture](docs/ARCHITECTURE.md)
+- [Security notes](docs/SECURITY.md)
+- [OAuth setup](docs/OAUTH_SETUP.md)
+
 ## UI design contract
 
-Web and Chrome extension UI work follows:
+Web and Chrome extension UI work follows this reading order:
 
-- [UI foundation and design tokens](docs/design/ui-foundation.md)
-- [Component and state contracts](docs/design/component-contracts.md)
-- [Product UX and terminology](docs/product/ux-language.md)
+1. [UI foundation and design tokens](docs/design/ui-foundation.md)
+2. [Component and state contracts](docs/design/component-contracts.md)
+3. [Product UX and terminology](docs/product/ux-language.md)
 
-These documents extend the existing Tailwind and shadcn architecture and are
-the visual and interaction baseline for page-specific work.
+Together these documents explain the visual system, shared component rules, and
+product language that page-specific work should reuse.
 
 ---
 
